@@ -20,6 +20,8 @@ jobs:
           cp printpath.sh /home/runner/bin/
           echo "PATH=$PATH:/home/runner/bin" >>  {{ GITHUB_ENV }}
       - name: Check if env var is updated
+        with:
+          PATH: ${{ env.PATH }} 
         run: |
           echo $PATH
           printpath.sh
