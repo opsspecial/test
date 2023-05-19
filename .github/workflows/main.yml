@@ -1,25 +1,24 @@
 name: Testing
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-      - test/**
-
+      - testing*
 jobs:
-  testing
-    name: update env path
+  testing:
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: export env var
+      - name: update env
         run: |
           mkdir -p /home/runner/bin
           echo "Print the PATH: $PATH" >> printpath.sh
           chmod +x printpath.sh
           cp printpath.sh /home/runner/bin/
-          echo "PATH=$PATH:/home/runner/bin" >> ${{ GITHUB_ENV }}
+          echo "PATH=$PATH:/home/runner/bin" >>  {{ GITHUB_ENV }}
       - name: Check if env var is updated
         run: |
           echo $PATH
