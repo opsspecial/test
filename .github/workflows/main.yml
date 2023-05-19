@@ -15,7 +15,7 @@ jobs:
       - name: update env
         run: |
           mkdir -p /home/runner/bin
-          echo "Print the PATH: $PATH" >> printpath.sh
+          echo 'echo "Print the PATH: $PATH"' >> printpath.sh
           chmod +x printpath.sh
           cp printpath.sh /home/runner/bin/
           echo "PATH=$PATH:/home/runner/bin" >>  ${GITHUB_ENV}
@@ -23,8 +23,5 @@ jobs:
         run: |
           echo $PATH
           printpath.sh
-        env:
-          PATH: ${{ env.PATH }} 
-
 
 
