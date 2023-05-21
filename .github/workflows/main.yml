@@ -24,16 +24,11 @@ jobs:
 #           echo $PATH
 #           printpath.sh
       - name: test2
-        env:
-          TEST_DIR: /home/runner/wallet
         run: |
-          pwd
-          mkdir -p ${TEST_DIR}
-          ls -l /home/runner/
-          curl -Lo ${TEST_DIR}/kubectl https://dl.k8s.io/release/v1.27.1/bin/linux/amd64/kubectl
-          echo "TEST_DIR=${TEST_DIR}" >> $GITHUB_ENV;
+          mkdir -p ${GITHUB_WORKSPACE}
+          curl -Lo ${GITHUB_WORKSPACE}/kubectl https://dl.k8s.io/release/v1.27.1/bin/linux/amd64/kubectl
       - name: test3
         run: |
-          echo ${TEST_DIR}
-          ls -l ${TEST_DIR}
+          echo ${GITHUB_WORKSPACE}/
+          ls -l ${GITHUB_WORKSPACE}/
 
