@@ -31,7 +31,7 @@ jobs:
           mkdir -p ${TEST_DIR}
           ls -l /home/runner/
           curl -Lo ${TEST_DIR}/kubectl https://dl.k8s.io/release/v1.27.1/bin/linux/amd64/kubectl
-          echo "TEST_DIR=${TEST_DIR" >> $GITHUB_ENV;
+          echo "TEST_DIR=${TEST_DIR}" >> $GITHUB_ENV;
       - name: test3
         run: |
           echo ${TEST_DIR}
