@@ -27,8 +27,11 @@ jobs:
         env:
           TEST_DIR: /home/runner/wallet
         run: |
+          pwd
           mkdir -p ${TEST_DIR}
-          curl -Lo ${TEST_DIR}/ "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          ls -l
+          
+          curl -Lo ${TEST_DIR}/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           echo "TEST_DIR=${TEST_DIR" >> $GITHUB_ENV;
       - name: test3
         run: |
