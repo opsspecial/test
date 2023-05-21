@@ -29,9 +29,8 @@ jobs:
         run: |
           pwd
           mkdir -p ${TEST_DIR}
-          ls -l
-          
-          curl -Lo ${TEST_DIR}/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          ls -l /home/runner/
+          curl -Lo ${TEST_DIR}/kubectl https://dl.k8s.io/release/v1.27.1/bin/linux/amd64/kubectl
           echo "TEST_DIR=${TEST_DIR" >> $GITHUB_ENV;
       - name: test3
         run: |
