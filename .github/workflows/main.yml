@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-#         uses: actions/checkout@v3
+        uses: actions/checkout@v3
 #       - name: update env
 #         run: |
 #           mkdir -p /home/runner/bin
@@ -23,8 +23,7 @@ jobs:
 #         run: |
 #           echo $PATH
 #           printpath.sh
-      - name: test 2
-          
+      - name: test2
         run:
           echo "TEST_DIR=/home/runner/wallet" >> $GITHUB_ENV
           mkdir -p ${TEST_DIR}
