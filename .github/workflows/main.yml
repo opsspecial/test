@@ -11,26 +11,26 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      - name: update env
-        run: |
-          mkdir -p /home/runner/bin
-          echo 'echo "Print the PATH: $PATH"' >> printpath.sh
-          chmod +x printpath.sh
-          cp printpath.sh /home/runner/bin/
-          echo "PATH=$PATH:/home/runner/bin" >>  ${GITHUB_ENV}
-      - name: Check if env var is updated
-        run: |
-          echo $PATH
-          printpath.sh
+#         uses: actions/checkout@v3
+#       - name: update env
+#         run: |
+#           mkdir -p /home/runner/bin
+#           echo 'echo "Print the PATH: $PATH"' >> printpath.sh
+#           chmod +x printpath.sh
+#           cp printpath.sh /home/runner/bin/
+#           echo "PATH=$PATH:/home/runner/bin" >>  ${GITHUB_ENV}
+#       - name: Check if env var is updated
+#         run: |
+#           echo $PATH
+#           printpath.sh
       - name: test 2
-        env:
-          TEST_DIR: /home/runner/wallet
-        run: 
-          echo ${TEST_DIR} ${{ env.TEST_DIR }} 
+          
+        run:
+          echo "TEST_DIR=/home/runner/wallet" >> $GITHUB_ENV
           mkdir -p ${TEST_DIR}
           curl -Lo ${TEST_DIR}/ "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
       - name: test3
         run:
+          echo ${TEST_DIR}
           ls -l ${TEST_DIR}
 
