@@ -15,10 +15,10 @@ jobs:
       - name: update env
         run: |
           mkdir -p /home/runner/bin
-          echo "Print the PATH: $PATH" >> printpath.sh
+          echo 'echo "Print the PATH: $PATH"' >> printpath.sh
           chmod +x printpath.sh
           cp printpath.sh /home/runner/bin/
-          echo "PATH=$PATH:/home/runner/bin" >>  {{ GITHUB_ENV }}
+          echo "PATH=$PATH:/home/runner/bin" >>  ${GITHUB_ENV}
       - name: Check if env var is updated
         run: |
           echo $PATH
@@ -31,5 +31,4 @@ jobs:
       - name: test3
         run:
           ls -l ${TEST_DIR}
-
 
