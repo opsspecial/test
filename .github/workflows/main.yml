@@ -15,14 +15,14 @@ jobs:
       - name: update env
         run: |
           mkdir -p /home/runner/bin
-          echo 'echo "Print the PATH: $PATH"' >> printpath.sh
-          chmod +x printpath.sh
-          cp printpath.sh /home/runner/bin/
-          echo "PATH=$PATH:/home/runner/bin" >>  ${GITHUB_ENV}
-      - name: Check if env var is updated
+          echo "PATH=$PATH:/home/runner/bin" >>  $GITHUB_ENV
+          echo "::add-mask::$SECRET_VAR"
+          echo "SECRET_VAR=Supers#dcrereioed" >> $GITHUB_ENV
+          echo "::add-mask::$SECRET_VAR"
+          echo "SECRET_VAR2=Supers#dcrereioedxxds" >> $GITHUB_ENV
+      - name: mask vars
         run: |
-          echo $PATH
-          printpath.sh
+          
       - name: test 2
         env:
           TEST_DIR: /home/runner/wallet
