@@ -17,12 +17,12 @@ jobs:
           mkdir -p /home/runner/bin
           echo "PATH=$PATH:/home/runner/bin" >>  $GITHUB_ENV
           echo "::add-mask::$SECRET_VAR"
-          echo "SECRET_VAR=Supers#dcrereioed" >> $GITHUB_ENV
-          echo "::add-mask::$SECRET_VAR"
-          echo "SECRET_VAR2=Supers#dcrereioedxxds" >> $GITHUB_ENV
+          echo "::add-mask::$SECRET_VAR2"
+          echo "SECRET_VAR=$${{ env.SECRET_VAR }}" >> $GITHUB_ENV
+          echo "SECRET_VAR2=$${{ env.SECRET_VAR2 }}" >> $GITHUB_ENV
       - name: check updated
         run: |
-          echo "Secret Var is $SECRET_VAR or ${{ env.SECRET_VAR }}"
-          echo "Secret Var2 is $SECRET_VAR2 or ${{ env.SECRET_VAR2 }}"
+          echo "Secret Var is $SECRET_VAR or $SECRET_VAR"
+          echo "Secret Var2 is $SECRET_VAR2 or $SECRET_VAR2"
 
 
