@@ -12,23 +12,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: update env
+#       - name: update env
+#         run: |
+#           mkdir -p /home/runner/bin
+#           echo 'echo "Print the PATH: $PATH"' >> printpath.sh
+#           chmod +x printpath.sh
+#           cp printpath.sh /home/runner/bin/
+#           echo "PATH=$PATH:/home/runner/bin" >>  ${GITHUB_ENV}
+#       - name: Check if env var is updated
+#         run: |
+#           echo $PATH
+#           printpath.sh
+      - name: test2
         run: |
-          mkdir -p /home/runner/bin
-          echo "PATH=$PATH:/home/runner/bin" >>  $GITHUB_ENV
-          echo "::add-mask::$SECRET_VAR"
-          echo "SECRET_VAR=Supers#dcrereioed" >> $GITHUB_ENV
-          echo "::add-mask::$SECRET_VAR"
-          echo "SECRET_VAR2=Supers#dcrereioedxxds" >> $GITHUB_ENV
-      - name: mask vars
-        run: |
-          
-      - name: test 2
-        env:
-          TEST_DIR: /home/runner/wallet
-        run: 
-          curl -Lo ${TEST_DIR}/ "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          mkdir -p ${GITHUB_WORKSPACE}
+          curl -Lo ${GITHUB_WORKSPACE}/kubectl https://dl.k8s.io/release/v1.27.1/bin/linux/amd64/kubectl
       - name: test3
-        run:
-          ls -l ${TEST_DIR}
+        run: |
+          echo ${GITHUB_WORKSPACE}/
+          ls -l ${GITHUB_WORKSPACE}/
 
