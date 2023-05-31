@@ -15,10 +15,13 @@ jobs:
 
       - name: check secret
         env:
-          SUPER_SECRET:$(echo ${{ secrets.secret }} | base64 -d}}
+          SUPER_SECRET:${{ secrets.SECRET }}
         run: |
-          echo $secret
-          echo $SUPER_SECRET
+          echo "TF_VAR_supersecret=$(echo ${{ env.SUPER_SECRET }} | base64 -d)" >> $GITHUB_ENV
+      - name: check env variable
+        run: |
+          echo $TF_VAR_supersecret
+          
 #       - name: update env
 #         run: |
 #           mkdir -p /home/runner/bin
