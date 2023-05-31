@@ -9,13 +9,16 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-22.04
+    env:
+      SECRET1: eyJyZWFkLW9ubHkiOiJ4Y3hjeHh4eHgteHl4eS1hYnpkLTg4MjJkLTZ5ZjQ0NDA1N3h4IiwiYWRtaW5pc3RyYXRvciI6InhjeGN4eHh4eC14eXh5LWFiemQtODgyMmQtNnk1Nzk5OTk5eXkiIH0K
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: check secret
         run: |
-          echo "TF_VAR_supersecret=$(echo ${{ secrets.SECRET }} | base64 -d)" >> $GITHUB_ENV
+          echo "TF_VAR_supersecret=$(echo ${{ env.SECRET1 }} | base64 -d)" >> $GITHUB_ENV
       - name: check env variable
         run: |
           echo $TF_VAR_supersecret
