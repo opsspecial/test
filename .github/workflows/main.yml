@@ -12,17 +12,24 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: update env
-        run: |
-          mkdir -p /home/runner/bin
-          echo "PATH=$PATH:/home/runner/bin" >>  $GITHUB_ENV
-          echo "::add-mask::${{ env.SECRET_VAR }}"
-          echo "::add-mask::${{ env.SECRET_VAR2 }}"
-          echo "SECRET_VAR=${{ env.SECRET_VAR }}" >> $GITHUB_ENV
-          echo "SECRET_VAR2=${{ env.SECRET_VAR2 }}" >> $GITHUB_ENV
-      - name: check updated
-        run: |
-          echo "Secret Var is $SECRET_VAR or ${{ env.SECRET_VAR }}"
-          echo "Secret Var2 is $SECRET_VAR2 or ${{ env.SECRET_VAR2 }}"
 
+      - name: check secret
+        env:
+          SUPER_SECRET:$(echo ${{ secrets.secret }} | base64 -d}}
+        run: |
+          echo $secret
+          echo $SUPER_SECRET
+#       - name: update env
+#         run: |
+#           mkdir -p /home/runner/bin
+#           echo "PATH=$PATH:/home/runner/bin" >>  $GITHUB_ENV
+#           echo "::add-mask::${{ env.SECRET_VAR }}"
+#           echo "::add-mask::${{ env.SECRET_VAR2 }}"
+#           echo "SECRET_VAR=${{ env.SECRET_VAR }}" >> $GITHUB_ENV
+#           echo "SECRET_VAR2=${{ env.SECRET_VAR2 }}" >> $GITHUB_ENV
+#       - name: check updated
+#         run: |
+#           echo "Secret Var is $SECRET_VAR or ${{ env.SECRET_VAR }}"
+#           echo "Secret Var2 is $SECRET_VAR2 or ${{ env.SECRET_VAR2 }}"
+     
 
