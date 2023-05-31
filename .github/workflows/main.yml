@@ -14,10 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: check secret
-        env:
-          SUPER_SECRET:${{ secrets.SECRET }}
         run: |
-          echo "TF_VAR_supersecret=$(echo ${{ env.SUPER_SECRET }} | base64 -d)" >> $GITHUB_ENV
+          echo "TF_VAR_supersecret=$(echo ${{ secrets.SECRET }} | base64 -d)" >> $GITHUB_ENV
       - name: check env variable
         run: |
           echo $TF_VAR_supersecret
