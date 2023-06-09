@@ -9,31 +9,23 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-22.04
-    env:
-      SECRET1: eyJyZWFkLW9ubHkiOiJ4Y3hjeHh4eHgteHl4eS1hYnpkLTg4MjJkLTZ5ZjQ0NDA1N3h4IiwiYWRtaW5pc3RyYXRvciI6InhjeGN4eHh4eC14eXh5LWFiemQtODgyMmQtNnk1Nzk5OTk5eXkiIH0K
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: update env
+        env:
+          vars: ${{ env.ENV_VARS }}
+        run: |
+            base64 -d $vars > varfile.txt
+            while read line 
+            do
+              varname=$(echo $line | cut -d "=" -f1)
+              echo $varname
+              echo '::add-mast::$varnanme'
+            done
+            cat vars >> $GITHUB_ENV
+      - name: check masking
+        run: |
+          echo $SECRET1
 
-      - name: check secret
-        run: |
-          echo "TF_VAR_supersecret=$(echo ${{ env.SECRET1 }} | base64 -d)" >> $GITHUB_ENV
-      - name: check env variable
-        run: |
-          echo $TF_VAR_supersecret
-          
-#       - name: update env
-#         run: |
-#           mkdir -p /home/runner/bin
-#           echo "PATH=$PATH:/home/runner/bin" >>  $GITHUB_ENV
-#           echo "::add-mask::${{ env.SECRET_VAR }}"
-#           echo "::add-mask::${{ env.SECRET_VAR2 }}"
-#           echo "SECRET_VAR=${{ env.SECRET_VAR }}" >> $GITHUB_ENV
-#           echo "SECRET_VAR2=${{ env.SECRET_VAR2 }}" >> $GITHUB_ENV
-#       - name: check updated
-#         run: |
-#           echo "Secret Var is $SECRET_VAR or ${{ env.SECRET_VAR }}"
-#           echo "Secret Var2 is $SECRET_VAR2 or ${{ env.SECRET_VAR2 }}"
-     
 
