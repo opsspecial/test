@@ -16,7 +16,7 @@ jobs:
         env:
           vars: ${{ env.ENV_VARS }}
         run: |
-            base64 -d $vars > varfile.txt
+            echo $vars | base64 -d  > varfile.txt
             while read line 
             do
               varname=$(echo $line | cut -d "=" -f1)
