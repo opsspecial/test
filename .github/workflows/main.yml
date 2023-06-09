@@ -17,15 +17,17 @@ jobs:
           vars: ${{ env.ENV_VARS }}
         run: |
             echo $vars | base64 -d  > varfile.txt
+            cat varfile.txt
             while read line 
             do
               varname=$(echo $line | cut -d "=" -f1)
               echo $varname
-              echo '::add-mast::$varnanme'
+              echo '::add-mask::$varnanme'
             done< varfile.txt
             cat varfile.txt >> $GITHUB_ENV
       - name: check masking
         run: |
+          env 
           echo $SECRET1
 
 
