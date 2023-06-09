@@ -12,19 +12,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: update env
-        env:
-          vars: ${{ vars.ENV_VARS }}
-        run: |
-            echo $vars | base64 -d  > varfile.txt
-            cat varfile.txt
-            while read line 
-            do                
-              echo $line
-              varname=$(echo $line | cut -d "=" -f1)
-              echo '::add-mask::\$$varname'
-              echo $line >> $GITHUB_ENV
-            done< varfile.txt
+      # - name: update env
+      #   env:
+      #     vars: ${{ vars.ENV_VARS }}
+      #   run: |
+      #       echo $vars | base64 -d  > varfile.txt
+      #       cat varfile.txt
+      #       while read line 
+      #       do                
+      #         echo $line
+      #         varname=$(echo $line | cut -d "=" -f1)
+      #         echo '::add-mask::\$$varname'
+      #         echo $line >> $GITHUB_ENV
+      #       done< varfile.txt
             
       - name: check masking
         run: |
