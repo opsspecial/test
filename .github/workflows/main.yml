@@ -18,13 +18,16 @@ jobs:
         run: |
             echo $vars | base64 -d  > varfile.txt
             cat varfile.txt
+            
+            echo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             while read line 
             do                
               echo $line
-              varname=$(echo $line | cut -d "=" -f1)
-              echo  "echo '::add-mask::\$$varname'"
+              varname=$(echo $line | cut -d "=" -f2)
+              echo "::add-mask::$varname"
               echo $line >> $GITHUB_ENV
             done< varfile.txt
+            
             
       - name: check masking
         run: |
