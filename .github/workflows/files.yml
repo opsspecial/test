@@ -32,7 +32,6 @@ jobs:
     needs: changes
     steps:    
       - name: List changed files
-        needs: changes
         env:
           is_changed: ${{ needs.changes.outputs.data}}
           changed_files: ${{ needs.changes.outputs.data_files }}
