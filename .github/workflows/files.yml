@@ -42,8 +42,9 @@ jobs:
         env: 
           directories: ${{ env.directories }}
         run: |
-          pwd
+          current_dir=$(pwd)
           echo "Start for loop"
+
           for directory in $directories
           do
             echo "This is for dir: $directory"
@@ -53,6 +54,6 @@ jobs:
             echo $directory
             cd $directory
             ls -l
-            cd ../
+            cd  $current_dir
           done
         

@@ -17,3 +17,6 @@ resource "" "name" {
   
 }
 
+resource "" "name" {
+  
+}
