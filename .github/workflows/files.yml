@@ -38,7 +38,6 @@ jobs:
             fi
           done
           echo "directories=${directories[*]}" >> $GITHUB_ENV
-
       - name: Run terraform
         env: 
           directories: ${{ env.directories }}
@@ -46,7 +45,7 @@ jobs:
           for directory in $directories
           do
             echo $directory
-            cd directory
+            cd $directory
             ls -l
             cp -rf oci/modules $directory/
             ls -l

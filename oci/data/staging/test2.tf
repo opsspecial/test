@@ -1,3 +1,7 @@
 provider "" {
-    
+
+}
+
+resource "somerandom" {
+  
 }
