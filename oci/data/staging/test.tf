@@ -1,5 +1,5 @@
 terraform {
-  provider_meta "some" {
+  provider_meta "somemore" {
     
   }
 }
