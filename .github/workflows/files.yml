@@ -16,7 +16,7 @@ jobs:
         uses: dorny/paths-filter@v2
         id: filter
         with:
-          list-files: shell
+          list-files: csv
           base: ${{ github.ref }}
           filters: |
             core:
@@ -38,7 +38,17 @@ jobs:
           changed_files: ${{ needs.changes.outputs.data_files }}
         run: 
           echo "${{ env.is_changed }}"
-          echo "${{ env.changed_files }}"
+          folder_names=$(cut -d ',' -f 1 "$changed_files" | awk -F '/' '{print $1}' | sort | uniq)
+          echo $folder_names
+          folder_array=()
+          while IFS= read -r folder; do
+              folder_array+=("$folder")
+          done <<< "$folder_names"
+          echo "Unique folders:"
+          for folder in "${folder_array[@]}"; do
+              echo "$folder"
+          done
+          
         
             
 
