@@ -17,4 +17,3 @@ resource "" "name" {
   
 }
 
-dd

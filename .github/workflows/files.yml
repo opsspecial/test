@@ -49,9 +49,10 @@ jobs:
             echo "This is for dir: $directory"
             pwd & ls -l
             echo "start Copying"
-            cp -r ./oci/modules ./$directory
+            cp -r oci/modules $directory
             echo $directory
-            cd ./$directory
+            cd $directory
             ls -l
+            cd ../
           done
         
