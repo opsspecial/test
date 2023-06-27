@@ -45,9 +45,8 @@ jobs:
           for directory in $directories
           do
             echo $directory
-            cd $directory
-            ls -l
             cp -rf oci/modules $directory/
+            cd $directory
             ls -l
           done
         

@@ -11,3 +11,7 @@ provider "oci" {
 resource "somerandom" {
   
 }
+
+resource "" "name" {
+  
+}
