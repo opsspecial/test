@@ -2,10 +2,7 @@ name: Testing
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - testing*
+
 jobs:
   testing:
     runs-on: ubuntu-22.04
