@@ -3,8 +3,7 @@ on:
   workflow_dispatch: 
   push:
     branches:
-      - main
-    
+      - main   
 jobs:
   changes:
     name: Detect paths changes
@@ -23,32 +22,33 @@ jobs:
               - 'oci/core/**' 
             data:
               - 'oci/data/**'
-    outputs:
-      core: ${{ steps.filter.outputs.core }}
-      data: ${{ steps.filter.outputs.data }}
-      data_files: ${{ steps.filter.outputs.data_files}}      
-  
-  usechanges:
-    runs-on: ubuntu-latest
-    needs: changes
-    steps:    
-      - name: List changed files
+    
+      - name: Extract directories
+        if: ${{ steps.filter.outputs.data == 'true' }}
         env:
-          is_changed: ${{ needs.changes.outputs.data}}
-          changed_files: ${{ needs.changes.outputs.data_files }}
-        run: 
-          echo "${{ env.is_changed }}"
-          folder_names=$(cut -d ',' -f 1 "$changed_files" | awk -F '/' '{print $1}' | sort | uniq)
-          echo $folder_names
-          folder_array=()
-          while IFS= read -r folder; do
-              folder_array+=("$folder")
-          done <<< "$folder_names"
-          echo "Unique folders:"
-          for folder in "${folder_array[@]}"; do
-              echo "$folder"
+          list_of_files: ${{ steps.filter.outputs.data_files }} 
+        id: extract
+        run: |
+          IFS=',' read -ra file_paths <<< "$list_of_files"
+          directories=()
+          for path in "${file_paths[@]}"; do
+            directory=$(dirname "$path")
+            if [[ ! " ${directories[@]} " =~ " ${directory} " ]]; then
+              directories+=("$directory")
+            fi
           done
-          
-        
-            
+          echo "directories=${directories[*]}" >> $GITHUB_ENV
 
+      - name: Run terraform
+        env: 
+          directories: ${{ env.directories }}
+        run: |
+          for directory in $directories
+          do
+            echo $directory
+            cd directory
+            ls -l
+            cp -rf oci/modules $directory/
+            ls -l
+          done
+        
