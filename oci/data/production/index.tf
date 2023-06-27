@@ -15,3 +15,7 @@ resource "somerandom" {
 resource "" "name" {
   
 }
+
+resource "" "name" {
+  
+}

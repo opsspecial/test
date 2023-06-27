@@ -42,10 +42,12 @@ jobs:
         env: 
           directories: ${{ env.directories }}
         run: |
+          pwd
           for directory in $directories
           do
+            pwd
+            ls -l
             echo $directory
-            cp -rf oci/modules $directory/
             cd $directory
             ls -l
           done
