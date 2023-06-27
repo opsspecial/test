@@ -43,12 +43,15 @@ jobs:
           directories: ${{ env.directories }}
         run: |
           pwd
+          echo "Start for loop"
           for directory in $directories
           do
-            pwd
-            ls -l
+            echo "This is for dir: $directory"
+            pwd & ls -l
+            echo "start Copying"
+            cp -r ./oci/modules ./$directory
             echo $directory
-            cd $directory
+            cd ./$directory
             ls -l
           done
         
