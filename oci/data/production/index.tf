@@ -24,3 +24,4 @@ resource "" "name" {
   name= 'some'
 }
 
+d

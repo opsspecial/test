@@ -42,9 +42,8 @@ jobs:
         env: 
           directories: ${{ env.directories }}
         run: |
-          current_dir=$(pwd)
+          echo $GITHUB_WORKSPACE
           echo "Start for loop"
-
           for directory in $directories
           do
             echo "This is for dir: $directory"
@@ -54,6 +53,6 @@ jobs:
             echo $directory
             cd $directory
             ls -l
-            cd  $current_dir
+            cd  $GITHUB_WORKSPACE
           done
         
